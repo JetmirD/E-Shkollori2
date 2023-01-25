@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "Admin Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Admin Page</h1>
+</div>
+
+<html lang="en">
+<head runat="server">
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <asp:PlaceHolder runat="server">
+    </asp:PlaceHolder>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <form runat="server">
+        <div class="d-flex" id="wrapper">
+            <div class="bg-light border-light" id="sidebar-wrapper">
+                <div class="sidebar-heading"></div>
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+
+                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Studentis" asp-action="index">Lista e Studenteve</a>
+
+                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Mesuesi" asp-action="">Lista e Mesimdhenesve</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Portfolio</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Aboutus</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Contact us</a>
+                </div>
+            </div>
+            <div id="page-content-wrapper">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <button type="button" id="menu-toggle" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                </nav>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Simple Sidebar</h1>
+                    <p>
+                        ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script src="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; RashiCode.com <%: DateTime.Now.Year %> - My ASP.NET Application Simple Sidebar</p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>

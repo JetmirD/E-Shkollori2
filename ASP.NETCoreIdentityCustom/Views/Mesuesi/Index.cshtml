@@ -1,0 +1,174 @@
+﻿@model IEnumerable<ASP.NETCoreIdentityCustom.Models.Mesuesi>
+
+@{
+    ViewData["Title"] = "Index";
+
+
+
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+
+
+
+
+<html lang="en">
+<head runat="server">
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <asp:PlaceHolder runat="server">
+    </asp:PlaceHolder>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <form runat="server">
+        <div class="d-flex" id="wrapper">
+            <div class="bg-light border-light" id="sidebar-wrapper">
+                <div class="sidebar-heading"><b>E-Shkollori</b></div>
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+
+                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Studentis" asp-action="index">Lista e Studenteve</a>
+
+                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Mesuesi" asp-action="">Lista e Mesimdhenesve</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Portfolio</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Aboutus</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Contact us</a>
+                </div>
+            </div>
+            <div id="page-content-wrapper">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <button type="button" id="menu-toggle" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                </nav>
+                <div class="container-fluid">
+                    <h3>Mesimdhenesit</h3>
+
+                    <p>
+                        <a asp-action="Create">Create New</a>
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Surname)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Lenda)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Surname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lenda)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+                    <div class="container">
+                        @if (pager.TotalPages > 0)
+                        {
+
+
+                            <ul class=" pagination justify-content-end">
+                                @if (pager.CurrentPage > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-controller="Mesuesi" asp-action="index" asp-route-pg="@(pager.StartPage)">First</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" asp-controller="Mesuesi" asp-action="index" asp-route-pg="@(pager.CurrentPage-1)">Previous </a>
+                                    </li>
+
+                                }
+
+                                @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                                {
+
+                                    <li class="page-item @(pge==pager.CurrentPage?"active":"")">
+
+                                        <a class="page-link" asp-controller="Mesuesi" asp-action="index" asp-route-pg="@pge">@pge</a>
+                                    </li>
+                                }
+
+                                @if (pager.CurrentPage < pager.TotalPages)
+                                {
+
+                                    <li class="page-item">
+                                        <a class="page-link" asp-controller="Mesuesi" asp-action="index" asp-route-pg="@(pager.CurrentPage+1)">Next</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" asp-controller="Mesuesi" asp-action="index" asp-route-pg="@(pager.EndPage)">Last</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <script src="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; Jetmir & Bleart - E-Shkollori</p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
