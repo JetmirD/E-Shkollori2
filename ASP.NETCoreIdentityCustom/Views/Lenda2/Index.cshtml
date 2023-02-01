@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ASP.NETCoreIdentityCustom.Models.Lenda2>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmriLendes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.LlojiLendes)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmriLendes)
+            </td>
+                <td>
+                <td>@Html.DisplayFor(modelItem => item.SelectedLlojiLendes)</td>
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.LendaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.LendaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.LendaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

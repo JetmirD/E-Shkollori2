@@ -4,6 +4,7 @@ using ASP.NETCoreIdentityCustom.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NETCoreIdentityCustom.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230131232704_ProjektiRi1")]
+    partial class ProjektiRi1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,26 +128,6 @@ namespace ASP.NETCoreIdentityCustom.Migrations
                     b.ToTable("Lenda");
                 });
 
-            modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.Lenda2", b =>
-                {
-                    b.Property<int>("LendaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LendaId"), 1L, 1);
-
-                    b.Property<string>("EmriLendes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SelectedLlojiLendes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LendaId");
-
-                    b.ToTable("Lenda2");
-                });
-
             modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.Mesuesi", b =>
                 {
                     b.Property<int>("Id")
@@ -198,19 +180,6 @@ namespace ASP.NETCoreIdentityCustom.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Studenti");
-                });
-
-            modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.testi", b =>
-                {
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("FirstName");
-
-                    b.ToTable("testi");
                 });
 
             modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.Transkripta", b =>

@@ -1,0 +1,37 @@
+﻿@model ASP.NETCoreIdentityCustom.Models.Lenda2
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Lenda2</h4>
+    <hr />
+    <table class="table">
+        <thead>
+        <tr>
+            <th class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.EmriLendes)
+            </th>
+            <th class="col-sm-2">
+                @Html.DisplayNameFor(model=>model.LlojiLendes)
+            </th>
+
+        </tr>
+        </thead>
+            <tr>
+            <td class = "col-sm-10">
+                @Html.DisplayFor(model => model.EmriLendes)
+            </td>
+            <td>
+                @Html.DisplayFor(model=>model.SelectedLlojiLendes)
+            </td>
+            </tr>
+    </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.LendaId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
