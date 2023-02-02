@@ -4,6 +4,7 @@ using ASP.NETCoreIdentityCustom.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NETCoreIdentityCustom.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230202210708_databazz124")]
+    partial class databazz124
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,14 +261,9 @@ namespace ASP.NETCoreIdentityCustom.Migrations
                     b.Property<int>("Nota")
                         .HasColumnType("int");
 
-                    b.Property<string>("StudentiId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("TranskriptaId");
 
                     b.HasIndex("LendaId");
-
-                    b.HasIndex("StudentiId");
 
                     b.ToTable("Transkripta2");
                 });
@@ -430,13 +427,7 @@ namespace ASP.NETCoreIdentityCustom.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ASP.NETCoreIdentityCustom.Areas.Identity.Data.ApplicationUser", "Studenti")
-                        .WithMany()
-                        .HasForeignKey("StudentiId");
-
                     b.Navigation("Lenda");
-
-                    b.Navigation("Studenti");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

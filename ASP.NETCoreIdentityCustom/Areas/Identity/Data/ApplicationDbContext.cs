@@ -35,6 +35,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     public DbSet<ASP.NETCoreIdentityCustom.Models.testi> testi { get; set; }
 
     public DbSet<ASP.NETCoreIdentityCustom.Models.Lenda2> Lenda2 { get; set; }
+
+    public DbSet<ASP.NETCoreIdentityCustom.Models.Transkripta2> Transkripta2 { get; set; }
 }
 
 public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>

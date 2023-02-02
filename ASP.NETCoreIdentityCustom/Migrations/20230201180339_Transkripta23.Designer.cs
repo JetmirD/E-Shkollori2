@@ -4,6 +4,7 @@ using ASP.NETCoreIdentityCustom.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NETCoreIdentityCustom.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230201180339_Transkripta23")]
+    partial class Transkripta23
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,41 +238,6 @@ namespace ASP.NETCoreIdentityCustom.Migrations
                     b.ToTable("Transkripta");
                 });
 
-            modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.Transkripta2", b =>
-                {
-                    b.Property<int>("TranskriptaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TranskriptaId"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LendaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Nota")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StudentiId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("TranskriptaId");
-
-                    b.HasIndex("LendaId");
-
-                    b.HasIndex("StudentiId");
-
-                    b.ToTable("Transkripta2");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -420,23 +387,6 @@ namespace ASP.NETCoreIdentityCustom.Migrations
                     b.HasOne("ASP.NETCoreIdentityCustom.Models.Transkripta", null)
                         .WithMany("Lenda")
                         .HasForeignKey("TranskriptaId");
-                });
-
-            modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.Transkripta2", b =>
-                {
-                    b.HasOne("ASP.NETCoreIdentityCustom.Models.Lenda2", "Lenda")
-                        .WithMany()
-                        .HasForeignKey("LendaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ASP.NETCoreIdentityCustom.Areas.Identity.Data.ApplicationUser", "Studenti")
-                        .WithMany()
-                        .HasForeignKey("StudentiId");
-
-                    b.Navigation("Lenda");
-
-                    b.Navigation("Studenti");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
