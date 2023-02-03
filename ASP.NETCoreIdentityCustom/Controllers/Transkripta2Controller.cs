@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASP.NETCoreIdentityCustom.Areas.Identity.Data;
 using ASP.NETCoreIdentityCustom.Models;
+using Microsoft.AspNetCore.Authorization;
+using static ASP.NETCoreIdentityCustom.Core.Constants;
 
 namespace ASP.NETCoreIdentityCustom.Controllers
 {
