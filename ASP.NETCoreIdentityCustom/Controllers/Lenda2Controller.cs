@@ -20,9 +20,51 @@ namespace ASP.NETCoreIdentityCustom.Controllers
         }
 
         // GET: Lenda2
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-              return View(await _context.Lenda2.ToListAsync());
+            //Kodi per Sortimin Ascending te Crudit
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_asc" : "";
+            ViewData["NameSortParm1"] = String.IsNullOrEmpty(sortOrder) ? "name_asc1" : "";
+            //Kodi per filtrimin e Crudit
+            ViewData["CurrentFilter"] = searchString;
+            //kodi per pagination
+            ViewData["CurrentSort"] = sortOrder;
+
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+
+            var lendet = from s in _context.Lenda2
+                           select s;
+
+            //Kodi per filtrimin e Crudit
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                lendet = lendet.Where(s => s.EmriLendes.Contains(searchString));
+            }
+            //Kodi per Sortimin Ascending te Crudit
+            switch (sortOrder)
+            {
+                case "name_asc":
+                    lendet = lendet.OrderBy(s => s.EmriLendes);
+                    break;
+                case "name_asc1":
+                   lendet = lendet.OrderBy(s => s.SelectedLlojiLendes);
+                    break;
+              
+            }
+
+            int pageSize = 3;
+            return View(await PaginatedList<Lenda2>.CreateAsync(lendet.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Lenda2/Details/5

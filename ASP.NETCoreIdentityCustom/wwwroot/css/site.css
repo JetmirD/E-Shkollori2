@@ -25,7 +25,10 @@ div#page-content-wrapper {
 
 
 
-
+a {
+    color: #004dc0 !important;
+    text-decoration: none !important;
+}
 
 
 
