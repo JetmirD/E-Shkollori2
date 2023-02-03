@@ -7,8 +7,6 @@
 <h1>Index</h1>
 
 
-    </tbody>
-</table>
 <html lang="en">
 <head runat="server">
     <title><%: Page.Title %> - My ASP.NET Application</title>
@@ -44,8 +42,9 @@
                     </button>
                 </nav>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Lendet Mesimore</h1>
+                    <h1 class="mt-4">Transkripta e notave</h1>
                     <p>
+
                     <p>
                         <a asp-action="Create">Create New</a>
                     </p>
@@ -94,11 +93,9 @@
                                     </td>
                                 </tr>
                                 }
+                        </tbody>
+                    </table>
 
-
-
-
-                   
                 </div>
             </div>
         </div>
@@ -113,12 +110,12 @@
             });
         </script>
 
-
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            
+            <footer>
+            </footer>
         </div>
     </form>
 </body>
