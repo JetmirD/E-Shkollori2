@@ -1,10 +1,9 @@
-﻿@model IEnumerable<ASP.NETCoreIdentityCustom.Models.Nxenesi>
+﻿@model PaginatedList<ASP.NETCoreIdentityCustom.Models.Nxenesi>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
 
 <html lang="en">
@@ -24,12 +23,11 @@
                 <div class="list-group list-group-flush">
                     <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
 
-                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Lenda2" asp-action="index">Lendet</a>
+                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Nxenesis" asp-action="index">Nxenesit</a>
 
-                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Transkripta2" asp-action="index">Transkripta e notave</a>
-                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Oraris" asp-action="">Orari mesimor</a>
-                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Shkollas" asp-action="">Shkolla</a>
-                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Nxenesis" asp-action="">Nxenesi</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Portfolio</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
                     <a href="#" class="list-group-item list-group-item-action bg-light">Aboutus</a>
                     <a href="#" class="list-group-item list-group-item-action bg-light">Contact us</a>
                 </div>
@@ -42,61 +40,87 @@
                     </button>
                 </nav>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Nxenesi</h1>
+                    <h1 class="mt-4">Nxenesit</h1>
                     <p>
+                        <form asp-action="Index" method="get">
+                            <div class="form-actions no-color">
+                                <p>
+                                    Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                                    <input type="submit" value="Search" class="btn btn-default" /> |
+                                    <a asp-action="Index">Back to Full List</a>
+                                </p>
+                            </div>
+                        </form>
 
-                    <p>
-                        <a asp-action="Create">Create New</a>
-                    </p>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                        @Html.DisplayNameFor(model => model.Emri)
-                                </th>
-                                <th>
-                                        @Html.DisplayNameFor(model => model.Mbiemri)
-                                </th>
-                                <th>
-                                        @Html.DisplayNameFor(model => model.DataLindjes)
-                                </th>
-                                <th>
-                                        @Html.DisplayNameFor(model => model.NumriTelefonit)
-                                </th>
-                                <th>
-                                        @Html.DisplayNameFor(model => model.Shkolla)
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <p>Emri</p>
+                                    </th>
+                                    <th>
+                                        <p></p>
+                                    </th>
+                                    <th>
+                                        <p>Data e lindjes</p>
+                                    </th>
+                                    <th>
+                                        <p>Numri i telefonit</p>
+                                    </th>
+                                    <th>
+                                        <p>Emri i shkolles</p>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @foreach (var item in Model)
                                 {
-                                <tr>
-                                    <td>
+                                    <tr>
+                                        <td>
                                             @Html.DisplayFor(modelItem => item.Emri)
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
                                             @Html.DisplayFor(modelItem => item.Mbiemri)
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
                                             @Html.DisplayFor(modelItem => item.DataLindjes)
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
                                             @Html.DisplayFor(modelItem => item.NumriTelefonit)
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
                                             @Html.DisplayFor(modelItem => item.Shkolla.EmriShkolles)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        </td>
+                                    </tr>
                                 }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                        @{
+                            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                        }
+
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageNumber="@(Model.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @prevDisabled">
+                            Previous
+                        </a>
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageNumber="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @nextDisabled">
+                            Next
+                        </a>
+
 
 
 
@@ -120,12 +144,8 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-
         </div>
     </form>
-
 </body>
-<footer>
-    
-</footer>
 </html>
+      

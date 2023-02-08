@@ -25,7 +25,9 @@ namespace ASP.NETCoreIdentityCustom.Models
         [ForeignKey("ShkollaId ")]
         public Shkolla? Shkolla { get; set; }
 
-
-
+        internal static IQueryable<Nxenesi> Where(Func<object, bool> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

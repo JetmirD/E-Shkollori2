@@ -20,10 +20,50 @@ namespace ASP.NETCoreIdentityCustom.Controllers
         }
 
         // GET: Nxenesis
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+    string sortOrder,
+    string currentFilter,
+    string searchString,
+    int? pageNumber)
         {
-            var applicationDbContext = _context.Nxenesi.Include(n => n.Shkolla);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desci" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var nxenesi = from n in _context.Nxenesi.Include(o=>o.Shkolla)
+                          select n;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                nxenesi = nxenesi.Where(n => n.Emri.Contains(searchString)
+                                       || n.Mbiemri.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    nxenesi = nxenesi.OrderByDescending(n => n.Emri);
+                    break;
+                case "name_desci":
+                    nxenesi = nxenesi.OrderByDescending(n => n.Mbiemri);
+                    break;
+                default:
+                    nxenesi = nxenesi.OrderBy(n => n.Shkolla);
+                    break;
+            }
+
+            int pageSize = 3;
+            return View(await PaginatedList<Nxenesi>.CreateAsync(nxenesi.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Nxenesis/Details/5
