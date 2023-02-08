@@ -1,9 +1,8 @@
-﻿@model IEnumerable<ASP.NETCoreIdentityCustom.Models.Transkripta2>
+﻿@model IEnumerable<ASP.NETCoreIdentityCustom.Models.Shkolla>
 
- @{
+@{
     ViewData["Title"] = "Index";
 }
-
 
 
 
@@ -24,9 +23,9 @@
                 <div class="list-group list-group-flush">
                     <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
 
-                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Lenda2" asp-action="">Lendet</a>
+                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Lenda2" asp-action="index">Lendet</a>
 
-                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Transkripta2" asp-action="">Transkripta e notave</a>
+                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Transkripta2" asp-action="index">Transkripta e notave</a>
                     <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Oraris" asp-action="">Orari mesimor</a>
                     <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Shkollas" asp-action="">Shkolla</a>
                     <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
@@ -42,29 +41,23 @@
                     </button>
                 </nav>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Transkripta e notave</h1>
+                    <h1 class="mt-4">Shkolla</h1>
                     <p>
+                        
+
+                       
 
                     <p>
                         <a asp-action="Create">Create New</a>
                     </p>
-
-
-
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>
-                                        @Html.DisplayNameFor(model => model.Nota)
+                                        @Html.DisplayNameFor(model => model.EmriShkolles)
                                 </th>
                                 <th>
-                                        @Html.DisplayNameFor(model => model.CreatedAt)
-                                </th>
-                                <th>
-                                        @Html.DisplayNameFor(model => model.FullName)
-                                </th>
-                                <th>
-                                        @Html.DisplayNameFor(model => model.Lenda)
+                                        @Html.DisplayNameFor(model => model.SelectedLlojiShkolles)
                                 </th>
                                 <th></th>
                             </tr>
@@ -74,28 +67,25 @@
                                 {
                                 <tr>
                                     <td>
-                                            @Html.DisplayFor(modelItem => item.Nota)
+                                            @Html.DisplayFor(modelItem => item.EmriShkolles)
                                     </td>
                                     <td>
-                                            @Html.DisplayFor(modelItem => item.CreatedAt)
+                                            @Html.DisplayFor(modelItem => item.SelectedLlojiShkolles)
                                     </td>
                                     <td>
-                                            @Html.DisplayFor(model => item.FullName)
-                                    </td>
-
-                                    <td>
-                                            @Html.DisplayFor(modelItem => item.Lenda.EmriLendes)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.TranskriptaId">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.TranskriptaId">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.TranskriptaId">Delete</a>
+                                        <a asp-action="Edit" asp-route-id="@item.ShkollaId">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.ShkollaId">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.ShkollaId">Delete</a>
                                     </td>
                                 </tr>
                                 }
                         </tbody>
                     </table>
 
+
+
+
+                    </p>
                 </div>
             </div>
         </div>
@@ -110,13 +100,17 @@
             });
         </script>
 
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-            </footer>
+
         </div>
     </form>
+
 </body>
+<footer>
+    <p>&copy; RashiCode.com <%: DateTime.Now.Year %> - My ASP.NET Application Simple Sidebar</p>
+</footer>
 </html>
