@@ -20,10 +20,52 @@ namespace ASP.NETCoreIdentityCustom.Controllers
         }
 
         // GET: Oraris
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+     string sortOrder,
+     string currentFilter,
+     string searchString,
+     int? pageNumber)
         {
-            var applicationDbContext = _context.Orari.Include(o => o.Lenda);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var orari = from s in _context.Orari
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orari = orari.Where(s => 
+                                       s.Lenda.EmriLendes.Contains(searchString));
+            }
+            //switch (sortOrder)
+            //{
+            //    case "name_desc":
+            //        orari = orari.OrderByDescending(s => s.LastName);
+            //        break;
+            //    case "Date":
+            //        orari = orari.OrderBy(s => s.EnrollmentDate);
+            //        break;
+            //    case "date_desc":
+            //        students = students.OrderByDescending(s => s.EnrollmentDate);
+            //        break;
+            //    default:
+            //        students = students.OrderBy(s => s.LastName);
+            //        break;
+            //}
+
+            int pageSize = 3;
+            return View(await PaginatedList<Orari>.CreateAsync(orari.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Oraris/Details/5
@@ -155,14 +197,14 @@ namespace ASP.NETCoreIdentityCustom.Controllers
             {
                 _context.Orari.Remove(orari);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrariExists(int id)
         {
-          return _context.Orari.Any(e => e.OrariId == id);
+            return _context.Orari.Any(e => e.OrariId == id);
         }
     }
 }
