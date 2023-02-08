@@ -1,11 +1,10 @@
-﻿@model IEnumerable<ASP.NETCoreIdentityCustom.Models.Transkripta2>
+﻿@model IEnumerable<ASP.NETCoreIdentityCustom.Models.Orari>
 
- @{
+@{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-
 
 <html lang="en">
 <head runat="server">
@@ -26,8 +25,8 @@
 
                     <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Lenda2" asp-action="">Lendet</a>
 
-                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Transkripta2" asp-action="">Transkripta e notave</a>
-                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Oraris" asp-action="">Orari mesimor</a>
+                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Transkripta2" asp-action="index">Transkripta e notave</a>
+                    <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Oraris" asp-action="index">Orari mesimor</a>
                     <a href="#" class="list-group-item list-group-item-action bg-light">Portfolio</a>
                     <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
                     <a href="#" class="list-group-item list-group-item-action bg-light">Aboutus</a>
@@ -45,23 +44,19 @@
                     <h1 class="mt-4">Transkripta e notave</h1>
                     <p>
 
+                   
+
                     <p>
                         <a asp-action="Create">Create New</a>
                     </p>
-
-
-
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>
-                                        @Html.DisplayNameFor(model => model.Nota)
+                                        @Html.DisplayNameFor(model => model.Koha)
                                 </th>
                                 <th>
-                                        @Html.DisplayNameFor(model => model.CreatedAt)
-                                </th>
-                                <th>
-                                        @Html.DisplayNameFor(model => model.FullName)
+                                        @Html.DisplayNameFor(model => model.Klasa)
                                 </th>
                                 <th>
                                         @Html.DisplayNameFor(model => model.Lenda)
@@ -74,27 +69,24 @@
                                 {
                                 <tr>
                                     <td>
-                                            @Html.DisplayFor(modelItem => item.Nota)
+                                            @Html.DisplayFor(modelItem => item.Koha)
                                     </td>
                                     <td>
-                                            @Html.DisplayFor(modelItem => item.CreatedAt)
+                                            @Html.DisplayFor(modelItem => item.Klasa)
                                     </td>
-                                    <td>
-                                            @Html.DisplayFor(model => item.FullName)
-                                    </td>
-
                                     <td>
                                             @Html.DisplayFor(modelItem => item.Lenda.EmriLendes)
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.TranskriptaId">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.TranskriptaId">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.TranskriptaId">Delete</a>
+                                        <a asp-action="Edit" asp-route-id="@item.OrariId">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.OrariId">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.OrariId">Delete</a>
                                     </td>
                                 </tr>
                                 }
                         </tbody>
                     </table>
+
 
                 </div>
             </div>

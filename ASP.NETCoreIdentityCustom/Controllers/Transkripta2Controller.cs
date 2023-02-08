@@ -199,14 +199,14 @@ namespace ASP.NETCoreIdentityCustom.Controllers
             {
                 _context.Transkripta2.Remove(transkripta2);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool Transkripta2Exists(int id)
         {
-          return _context.Transkripta2.Any(e => e.TranskriptaId == id);
+            return _context.Transkripta2.Any(e => e.TranskriptaId == id);
         }
     }
 }

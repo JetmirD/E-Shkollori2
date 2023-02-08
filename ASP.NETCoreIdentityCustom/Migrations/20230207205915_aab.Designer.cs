@@ -4,6 +4,7 @@ using ASP.NETCoreIdentityCustom.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NETCoreIdentityCustom.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230207205915_aab")]
+    partial class aab
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,31 +175,6 @@ namespace ASP.NETCoreIdentityCustom.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Mesuesi");
-                });
-
-            modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.Orari", b =>
-                {
-                    b.Property<int>("OrariId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrariId"), 1L, 1);
-
-                    b.Property<int?>("Klasa")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Koha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("LendaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrariId");
-
-                    b.HasIndex("LendaId");
-
-                    b.ToTable("Orari");
                 });
 
             modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.Studenti", b =>
@@ -445,17 +422,6 @@ namespace ASP.NETCoreIdentityCustom.Migrations
                     b.HasOne("ASP.NETCoreIdentityCustom.Models.Transkripta", null)
                         .WithMany("Lenda")
                         .HasForeignKey("TranskriptaId");
-                });
-
-            modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.Orari", b =>
-                {
-                    b.HasOne("ASP.NETCoreIdentityCustom.Models.Lenda2", "Lenda")
-                        .WithMany()
-                        .HasForeignKey("LendaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lenda");
                 });
 
             modelBuilder.Entity("ASP.NETCoreIdentityCustom.Models.Transkripta2", b =>
