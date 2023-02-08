@@ -1,10 +1,10 @@
-﻿
+﻿@model IEnumerable<ASP.NETCoreIdentityCustom.Models.Nxenesi>
+
 @{
-    ViewData["Title"] = "Manager Page";
+    ViewData["Title"] = "Index";
 }
-<div class="text-center">
-    <h1 class="display-4">Manager Page</h1>
-</div>
+
+<h1>Index</h1>
 
 
 <html lang="en">
@@ -42,14 +42,64 @@
                     </button>
                 </nav>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Simple Sidebar</h1>
+                    <h1 class="mt-4">Nxenesi</h1>
                     <p>
-                        ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+                    <p>
+                        <a asp-action="Create">Create New</a>
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                        @Html.DisplayNameFor(model => model.Emri)
+                                </th>
+                                <th>
+                                        @Html.DisplayNameFor(model => model.Mbiemri)
+                                </th>
+                                <th>
+                                        @Html.DisplayNameFor(model => model.DataLindjes)
+                                </th>
+                                <th>
+                                        @Html.DisplayNameFor(model => model.NumriTelefonit)
+                                </th>
+                                <th>
+                                        @Html.DisplayNameFor(model => model.Shkolla)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                            @Html.DisplayFor(modelItem => item.Emri)
+                                    </td>
+                                    <td>
+                                            @Html.DisplayFor(modelItem => item.Mbiemri)
+                                    </td>
+                                    <td>
+                                            @Html.DisplayFor(modelItem => item.DataLindjes)
+                                    </td>
+                                    <td>
+                                            @Html.DisplayFor(modelItem => item.NumriTelefonit)
+                                    </td>
+                                    <td>
+                                            @Html.DisplayFor(modelItem => item.Shkolla.EmriShkolles)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                                }
+                        </tbody>
+                    </table>
+
+
+
                     </p>
                 </div>
             </div>
@@ -70,12 +120,12 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-           
+
         </div>
     </form>
 
 </body>
- <footer>
-                <p>&copy; RashiCode.com <%: DateTime.Now.Year %> - My ASP.NET Application Simple Sidebar</p>
-            </footer>
+<footer>
+    
+</footer>
 </html>

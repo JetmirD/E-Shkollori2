@@ -41,6 +41,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     public DbSet<ASP.NETCoreIdentityCustom.Models.Orari> Orari { get; set; }
 
     public DbSet<ASP.NETCoreIdentityCustom.Models.Shkolla> Shkolla { get; set; }
+
+    public DbSet<ASP.NETCoreIdentityCustom.Models.Nxenesi> Nxenesi { get; set; }
 }
 
 public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
